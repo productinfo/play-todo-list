@@ -1,0 +1,4 @@
+[submodule "ToDoList/ShinobiPlayUtils"]
+	path = ToDoList/ShinobiPlayUtils
+	url = git@bitbucket.org:shinobicontrols/shinobi-play-utils.git
+	branch = master
