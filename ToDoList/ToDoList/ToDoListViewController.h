@@ -10,7 +10,7 @@
 #import "ShinobiPlayUtils/SPUGalleryManagedViewController.h"
 #import <ShinobiGrids/ShinobiGrids.h>
 
-@interface ToDoListViewController : UIViewController
+@interface ToDoListViewController : SPUGalleryManagedViewController
 
 @property (strong, nonatomic) IBOutlet ShinobiDataGrid *grid;
 

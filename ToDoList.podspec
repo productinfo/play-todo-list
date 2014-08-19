@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files = 'ToDoList/ToDoList/**/*.{h,m}'
   s.dependency 'ShinobiPlayUtils'
-  s.resources = ['ToDoList/**/*.storyboard', 'ToDoList/**/*.xcassets']
+  s.resources = ['ToDoList/**/*.storyboard', 'ToDoList/**/*.xib', 'ToDoList/**/*.xcassets']
   s.frameworks = 'QuartzCore', 'ShinobiGrids'
   s.xcconfig     = { 'FRAMEWORK_SEARCH_PATHS' => '"$(DEVELOPER_FRAMEWORKS_DIR)" "$(PROJECT_DIR)/../"' }
 end
