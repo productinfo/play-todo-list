@@ -50,7 +50,7 @@
 }
 
 - (IBAction)doneSelected:(id)sender {
-  int selectedIndex = [self.categoryPicker selectedRowInComponent:0];
+  NSInteger selectedIndex = [self.categoryPicker selectedRowInComponent:0];
   [self.delegate didSelectCategory:selectedIndex];
 }
 

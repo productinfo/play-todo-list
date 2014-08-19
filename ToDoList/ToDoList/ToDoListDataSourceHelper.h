@@ -13,7 +13,7 @@
 
 - (instancetype)initWithDataGrid:(ShinobiDataGrid *)dataGrid delegate:(id<SDataGridDataSourceHelperDelegate>)gridDelegate;
 
-- (void)deleteItemInRow:(int)rowIndex;
+- (void)deleteItemInRow:(NSInteger)rowIndex;
 - (void)createNewToDoListItem;
 
 @end

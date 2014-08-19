@@ -48,6 +48,8 @@
     
     // Put the cell into edit mode (make the keyboard appear)
     [newCell respondToEditEvent];
+    
+    self.newRowAdded = NO;
   }
 }
 
@@ -90,8 +92,6 @@
       });
     }
   }
-  
-  self.newRowAdded = NO;
 }
 
 - (BOOL)shinobiDataGrid:(ShinobiDataGrid *)grid shouldBeginEditingCellAtCoordinate:(const SDataGridCoord *)coordinate {

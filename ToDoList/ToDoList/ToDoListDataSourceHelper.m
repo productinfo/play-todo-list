@@ -46,7 +46,7 @@
 
 #pragma mark - Row Deletion
 
-- (void)deleteItemInRow:(int)rowIndex {
+- (void)deleteItemInRow:(NSInteger)rowIndex {
   // Sorted data reflects the ordering of items on the screen
   // We need to set our data to match this ordering with the correct row removed
   NSMutableArray *mutableData = [NSMutableArray arrayWithArray:self.sortedData];

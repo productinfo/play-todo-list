@@ -95,7 +95,7 @@
 #pragma mark - Utility methods
 
 - (void)createAndAddColumnWithTitle:(NSString*)title propertyKey:(NSString*)propertyKey
-                              width:(int)width cellType:(Class)cellType canSort:(BOOL)canSort
+                              width:(NSInteger)width cellType:(Class)cellType canSort:(BOOL)canSort
                       textAlignment:(NSTextAlignment)alignment {
   SDataGridColumn *column = [SDataGridColumn columnWithTitle:title];
   column.propertyKey = propertyKey;
