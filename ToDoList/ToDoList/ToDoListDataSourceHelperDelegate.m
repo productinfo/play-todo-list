@@ -173,4 +173,10 @@
   return nil;
 }
 
+- (void) shinobiDataGrid:(ShinobiDataGrid *)grid didChangeSortOrderForColumn:(SDataGridColumn*) column
+                    from:(SDataGridColumnSortOrder) oldSortOrder {
+  // Update canReorderRows - we want them to be reorderable if and only if the sort order is none
+  grid.canReorderRows = (column.sortOrder == SDataGridColumnSortOrderNone);
+}
+
 @end
