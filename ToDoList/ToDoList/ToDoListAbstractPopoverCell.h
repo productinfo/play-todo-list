@@ -11,13 +11,13 @@
 
 @interface ToDoListAbstractPopoverCell : SDataGridCell
 
-@property (strong, nonatomic) UILabel* label;
-@property (strong, nonatomic) UINavigationController* navigationController;
-@property (strong, nonatomic) UIPopoverController* popover;
+@property (strong, nonatomic) UILabel *label;
+@property (strong, nonatomic) UINavigationController *navigationController;
+@property (strong, nonatomic) UIPopoverController *popover;
 
-@property (nonatomic, strong) ShinobiDataGrid* dataGrid;
-@property (strong, nonatomic) ToDoListItem* toDoListItem;
-@property (strong, nonatomic) ToDoListAbstractPopoverViewController* popoverViewController;
+@property (strong, nonatomic) ShinobiDataGrid *dataGrid;
+@property (strong, nonatomic) ToDoListItem *toDoListItem;
+@property (strong, nonatomic) ToDoListAbstractPopoverViewController *popoverViewController;
 
 - (void)createNavigationController;
 

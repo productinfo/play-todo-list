@@ -55,7 +55,7 @@
   // We need to set our data to match this ordering with the correct row removed
   NSMutableArray *mutableData = [NSMutableArray arrayWithArray:self.sortedData];
   [mutableData removeObjectAtIndex:rowIndex];
-  self.data = mutableData;
+  self.data = [mutableData copy];
   
   [self reloadData];
 }
@@ -77,7 +77,7 @@
   
   NSMutableArray *mutableData = [NSMutableArray arrayWithArray:self.data];
   [mutableData addObject:newItem];
-  self.data = mutableData;
+  self.data = [mutableData copy];
 }
 
 @end

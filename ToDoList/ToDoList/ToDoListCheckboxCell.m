@@ -38,13 +38,15 @@
 }
 
 - (void)setToDoListItem:(ToDoListItem *)toDoListItem {
-  _toDoListItem = toDoListItem;
-  [self updateImage];
+  if (toDoListItem != _toDoListItem) {
+    _toDoListItem = toDoListItem;
+    [self updateImage];
+  }
 }
 
 // This method is called when the cell is added to the grid. We need to take this opportunity
 // to position our check box where we want it - in the center of our cell.
--(void)layoutSubviews {
+- (void)layoutSubviews {
   self.checkbox.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
 }
 

@@ -12,20 +12,13 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.navigationItem.title = _pageTitle;
+  self.navigationItem.title = self.pageTitle;
   
   UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                   style:UIBarButtonItemStyleBordered
                                                                  target:self
                                                                  action:@selector(doneSelected:)];
   [self.navigationItem setRightBarButtonItem:rightButton];
-}
-
-
-- (void)viewDidUnload {
-  [super viewDidUnload];
-  // Release any retained subviews of the main view.
-  self.pageTitle = nil;
 }
 
 - (IBAction)doneSelected:(id)sender {

@@ -12,7 +12,7 @@
 
 @protocol ToDoListPickerDelegate<NSObject>
 @required
--(void)didSelectCategory:(ToDoListCategory)category;
+- (void)didSelectCategory:(ToDoListCategory)category;
 @end
 
 @interface ToDoListCategoryViewController : ToDoListAbstractPopoverViewController<UIPickerViewDataSource, UIPickerViewDelegate>

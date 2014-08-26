@@ -13,13 +13,13 @@
 
 @protocol ToDoListCheckboxCellDelegate <NSObject>
 
--(void)checkboxCellDidChange:(ToDoListCheckboxCell *)checkbox;
+- (void)checkboxCellDidChange:(ToDoListCheckboxCell *)checkbox;
 
 @end
 
 @interface ToDoListCheckboxCell : SDataGridCell
 
 @property (nonatomic, weak) id<ToDoListCheckboxCellDelegate> checkboxCellDelegate;
-@property (nonatomic, weak) ToDoListItem* toDoListItem;
+@property (nonatomic, strong) ToDoListItem *toDoListItem;
 
 @end

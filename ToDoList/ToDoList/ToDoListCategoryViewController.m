@@ -11,7 +11,7 @@
 @interface ToDoListCategoryViewController ()
 
 @property (nonatomic, strong) NSArray *categories;
-@property (strong, nonatomic) IBOutlet UIPickerView *categoryPicker;
+@property (nonatomic, strong) IBOutlet UIPickerView *categoryPicker;
 
 @end
 
@@ -29,12 +29,6 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self.categoryPicker selectRow:self.selectedCategory inComponent:0 animated:NO];
-}
-
-- (void)viewDidUnload {
-  [self setCategoryPicker:nil];
-  self.categories = nil;
-  [super viewDidUnload];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {

@@ -85,11 +85,11 @@
 }
 
 - (void)keyboardWillShow:(id)sender {
-  _addNewButton.enabled = NO;
+  self.addNewButton.enabled = NO;
 }
 
 - (void)keyboardWillHide:(id)sender {
-  _addNewButton.enabled = YES;
+  self.addNewButton.enabled = YES;
 }
 
 #pragma mark - Utility methods

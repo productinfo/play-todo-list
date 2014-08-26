@@ -36,7 +36,7 @@
 #pragma mark PickerDelegate methods
 
 // Called when the a new value has been selected in the picker
--(void)didSelectCategory:(ToDoListCategory)category {
+- (void)didSelectCategory:(ToDoListCategory)category {
   // Set the category
   self.toDoListItem.category = category;
   

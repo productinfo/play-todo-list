@@ -12,7 +12,7 @@
 
 @interface ToDoListAbstractPopoverViewController : UIViewController
 
-@property (nonatomic, strong) NSString* pageTitle;
+@property (nonatomic, strong) NSString *pageTitle;
 
 - (IBAction)doneSelected:(id)sender;
 

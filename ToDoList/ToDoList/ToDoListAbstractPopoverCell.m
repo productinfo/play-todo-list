@@ -30,7 +30,7 @@
   self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 
-- (void) setFrame:(CGRect)frame {
+- (void)setFrame:(CGRect)frame {
   [super setFrame:frame];
   // Set up the label's frame so it's inset by 20px from left/right and 10px from top/bottom
   self.label.frame = CGRectInset(self.bounds, 20, 10);
@@ -39,7 +39,7 @@
 #pragma mark SGridEventResponder methods
 
 // Called when the grid's edit event is triggered on this cell
-- (void) respondToEditEvent {
+- (void)respondToEditEvent {
   // We need to call the grid's delegate methods for editing cells before doing any more
   
   // Call the shouldBeginEditingCellAtCoordinate method on the grid's delegate (if the method exists)
