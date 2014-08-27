@@ -43,7 +43,7 @@
   self.datasource = [[ToDoListDataSourceHelper alloc] initWithDataGrid:self.grid delegate:self.delegate];
   
   self.grid.canReorderRows = YES;
-  self.grid.selectionMode = SDataGridSelectionModeCellSingle;
+  self.grid.defaultRowHeight = @45;
   
   // Add the columns to the grid
   [self createAndAddColumnWithTitle:nil

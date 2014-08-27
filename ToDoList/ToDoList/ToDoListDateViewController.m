@@ -24,8 +24,8 @@
   return self;
 }
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
   if (!self.selectedDate || [self.selectedDate isEqualToDate:[NSDate distantPast]]) {
     self.datePicker.date = [NSDate date];
   } else {

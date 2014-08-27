@@ -28,69 +28,65 @@
 #pragma mark - SDataGridDelegate methods
 
 - (void)didFinishLayingOutShinobiDataGrid:(ShinobiDataGrid *)grid {
-  // If we have just added a new row to the grid, open the task cell up for editing
+  // If we have just added a new row to the grid, highlight it and make sure it's currently visible
   if (self.newRowAdded) {
-    // If the new row is not visible scroll the grid to the bottom
-    float yOffset = grid.contentSize.height - grid.frame.size.height;
-    [grid setContentOffset:CGPointMake(0, MAX(0,yOffset)) animated:NO];
+    // Find current index of new row
+    ToDoListDataSourceHelper *datasourceHelper = (ToDoListDataSourceHelper*)grid.dataSource;
+    NSInteger rowIndex = [datasourceHelper.sortedData indexOfObject:[datasourceHelper.data lastObject]];
     
-    SDataGridRow *lastRow = [[grid visibleRows] lastObject];
-    SDataGridColumn *taskColumn = nil;
-    for (SDataGridColumn *column in grid.columns) {
-      if ([column.propertyKey isEqualToString:@"taskName"]) {
-        taskColumn = column;
-        break;
-      }
-    }
+    // Highlight the row just added
+    SDataGridRow *row = [SDataGridRow rowWithRowIndex:rowIndex sectionIndex:0];
+    [grid setSelectedRows:@[row] animated:YES];
     
-    SDataGridCoord *coordinate = [SDataGridCoord coordinateWithCol:taskColumn row:lastRow];
-    SDataGridTextCell *newCell = (SDataGridTextCell*)[grid visibleCellAtCoordinate:coordinate];
+    // Clear the highlight after a short delay
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.7 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [grid clearSelectionWithAnimation:YES];
+    });
     
-    // Put the cell into edit mode (make the keyboard appear)
-    [newCell respondToEditEvent];
+    // Make sure the new row is in view
+    [self shinobiDataGrid:grid bringRowIntoView:rowIndex];
     
     self.newRowAdded = NO;
   }
 }
 
 - (void)shinobiDataGrid:(ShinobiDataGrid *)grid didFinishEditingCellAtCoordinate:(SDataGridCoord *)coordinate {
+  ToDoListDataSourceHelper *datasourceHelper = (ToDoListDataSourceHelper*)grid.dataSource;
+  ToDoListItem *item = (datasourceHelper.sortedData)[coordinate.row.rowIndex];
+  
   // Update the toDoListItem if the task name has been edited. (For other editable columns,
   // our custom cells will update the toDoListItem)
   if ([coordinate.column.propertyKey isEqualToString:@"taskName"]) {
-    ToDoListDataSourceHelper *datasourceHelper = (ToDoListDataSourceHelper*)grid.dataSource;
     SDataGridTextCell *cell = (SDataGridTextCell*)[grid visibleCellAtCoordinate:coordinate];
-    
-    ToDoListItem *item = (datasourceHelper.sortedData)[coordinate.row.rowIndex];
     item.taskName = cell.textField.text;
   }
   
-  // Resort the grid
-  for (SDataGridColumn *col in grid.columns) {
-    if (col.sortOrder != SDataGridColumnSortOrderNone) {
-      // Temporarily set the selection mode to row
-      SDataGridSelectionMode oldSelectionMode = grid.selectionMode;
-      grid.selectionMode = SDataGridSelectionModeRowSingle;
+  // If the grid is sorted on the edited column, re-sort it
+  if (coordinate.column.sortOrder != SDataGridColumnSortOrderNone) {
+    // Select the row just edited
+    [grid setSelectedRows:@[coordinate.row] animated:YES];
+    
+    // Reorder the grid after a delay (to allow the row selection to finish)
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.2f * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      // To force a reorder, we first sort by None, then sort by the current sortOrder
+      SDataGridColumnSortOrder currentOrder = coordinate.column.sortOrder;
+      coordinate.column.sortOrder = SDataGridColumnSortOrderNone;
+      coordinate.column.sortOrder = currentOrder;
       
-      // Select the row just edited
-      [grid setSelectedRows:@[coordinate.row] animated:YES];
+      // Make sure the edited row is in view: first need to find its index
+      NSInteger rowIndex = [datasourceHelper.sortedData indexOfObject:item];
+      if (rowIndex != NSNotFound) {
+        [self shinobiDataGrid:grid bringRowIntoView:rowIndex];
+      }
       
-      // Reorder the grid after a delay (to allow the row selection to work)
-      dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.15f * NSEC_PER_SEC);
-      dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        // To force a reorder, we first sort by None, then sort by the current sortOrder
-        SDataGridColumnSortOrder currentOrder = col.sortOrder;
-        col.sortOrder = SDataGridColumnSortOrderNone;
-        col.sortOrder = currentOrder;
-        
-        // Clear the highlight after a short delay
-        dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
-        dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
-          [grid clearSelectionWithAnimation:YES];
-          // Reset the selection mode
-          grid.selectionMode = oldSelectionMode;
-        });
+      // Clear the highlight after a short delay
+      dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+      dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
+        [grid clearSelectionWithAnimation:YES];
       });
-    }
+    });
   }
 }
 
@@ -173,10 +169,46 @@
   return nil;
 }
 
-- (void) shinobiDataGrid:(ShinobiDataGrid *)grid didChangeSortOrderForColumn:(SDataGridColumn*) column
-                    from:(SDataGridColumnSortOrder) oldSortOrder {
+- (void)shinobiDataGrid:(ShinobiDataGrid *)grid didReorderRow:(SDataGridRow *)rowSwitched
+                withRow:(SDataGridRow *)rowSwitchedWith {
+  // Save the new order to use as our default
+  ToDoListDataSourceHelper *datasourceHelper = (ToDoListDataSourceHelper*)grid.dataSource;
+  datasourceHelper.data = [datasourceHelper.sortedData copy];
+}
+
+- (void)shinobiDataGrid:(ShinobiDataGrid *)grid didChangeSortOrderForColumn:(SDataGridColumn*) column
+                  from:(SDataGridColumnSortOrder) oldSortOrder {
   // Update canReorderRows - we want them to be reorderable if and only if the sort order is none
   grid.canReorderRows = (column.sortOrder == SDataGridColumnSortOrderNone);
+}
+
+#pragma mark - local methods
+
+- (void)shinobiDataGrid:(ShinobiDataGrid *)grid bringRowIntoView:(NSInteger)rowIndex {
+  // Only need to do anything if the grid's contents are taller than its frame - otherwise
+  // all rows are in view
+  if (grid.contentSize.height > grid.frame.size.height) {
+    CGFloat rowHeight = [[grid defaultRowHeight] floatValue] + grid.defaultGridLineStyle.width;
+    
+    // Calculate position of new row within grid
+    CGFloat rowTop = rowIndex * rowHeight;
+    CGFloat rowBottom = rowTop + rowHeight;
+    
+    CGFloat newYOffset = grid.contentOffset.y;
+    
+    if (grid.contentOffset.y > rowTop) {
+      // Row is scrolled off the top of the grid, so just scroll to its top
+      newYOffset = rowTop;
+    } else if (rowBottom > grid.contentOffset.y + grid.frame.size.height - [grid.defaultHeaderRowHeight floatValue]) {
+      // Row is off the bottom of the grid, so place it at the bottom
+      newYOffset = rowBottom - grid.frame.size.height + [grid.defaultHeaderRowHeight floatValue];
+    }
+    
+    if (newYOffset != grid.contentOffset.y) {
+      // Scroll to the new offset
+      [grid setContentOffset:CGPointMake(0, newYOffset) animated:YES];
+    }
+  }
 }
 
 @end
