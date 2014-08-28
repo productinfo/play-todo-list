@@ -11,7 +11,9 @@
 
 @interface ToDoListDataSourceHelper : SDataGridDataSourceHelper
 
-- (instancetype)initWithDataGrid:(ShinobiDataGrid *)dataGrid delegate:(id<SDataGridDataSourceHelperDelegate>)gridDelegate;
+// Initialize the helper with a grid, a delegate and an array of ToDoListItems
+- (instancetype)initWithDataGrid:(ShinobiDataGrid *)dataGrid delegate:(id<SDataGridDataSourceHelperDelegate>)gridDelegate
+                            data:(NSArray *)data;
 
 - (void)deleteItemInRow:(NSInteger)rowIndex;
 - (void)createNewToDoListItem;
