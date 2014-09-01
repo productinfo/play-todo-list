@@ -169,11 +169,15 @@
   return nil;
 }
 
-- (void)shinobiDataGrid:(ShinobiDataGrid *)grid didReorderRow:(SDataGridRow *)rowSwitched
-                withRow:(SDataGridRow *)rowSwitchedWith {
-  // Save the new order to use as our default
-  ToDoListDataSourceHelper *datasourceHelper = (ToDoListDataSourceHelper*)grid.dataSource;
-  datasourceHelper.data = [datasourceHelper.sortedData copy];
+- (void)shinobiDataGrid:(ShinobiDataGrid *)grid didEndReorderingRow:(SDataGridRow *)row {
+  // When the user has manually reordered the grid, save the new order to use as our default.
+  // We do this after a short delay to make sure the reordering animations have finished,
+  // because changing the data will result in a reload of the grid
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.2f * NSEC_PER_SEC);
+  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    ToDoListDataSourceHelper *datasourceHelper = (ToDoListDataSourceHelper*)grid.dataSource;
+    datasourceHelper.data = [datasourceHelper.sortedData copy];
+  });
 }
 
 - (void)shinobiDataGrid:(ShinobiDataGrid *)grid didChangeSortOrderForColumn:(SDataGridColumn*) column
