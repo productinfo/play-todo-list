@@ -31,7 +31,7 @@
 	
   [self setupGrid];
   self.addNewButton.center = CGPointMake(CGRectGetMaxX(self.grid.frame) - (CGRectGetWidth(self.addNewButton.frame) / 2),
-                                           CGRectGetMinY(self.grid.frame) - (CGRectGetHeight(self.addNewButton.frame) / 2));
+                                         CGRectGetMinY(self.grid.frame) - (CGRectGetHeight(self.addNewButton.frame) / 2));
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)
                                                name:UIKeyboardWillShowNotification object:nil];
