@@ -42,8 +42,10 @@
 - (void)createNewToDoListItem {
   // Create a new item, add it to the end of our list and reload the data
   ((ToDoListDataSourceHelperDelegate*)self.delegate).newRowAdded = YES;
-  ToDoListItem *newItem = [[ToDoListItem alloc] initWithTaskName:@"New Item" dueDate:[NSDate distantPast]
-                                                        category:NilCategory];
+  ToDoListItem *newItem = [[ToDoListItem alloc] initWithTaskName:@"New Item"
+                                                         dueDate:[NSDate distantPast]
+                                                        category:NilCategory
+                                                        complete:NO];
   NSMutableArray *mutableData = [NSMutableArray arrayWithArray:self.data];
   [mutableData addObject:newItem];
   self.data = [mutableData copy];

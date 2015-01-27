@@ -22,7 +22,9 @@ typedef NS_ENUM(NSInteger, ToDoListCategory) {
 @property (nonatomic, assign) ToDoListCategory category;
 @property (nonatomic, assign) BOOL complete;
 
-- (instancetype)initWithTaskName:(NSString*)name dueDate:(NSDate*)date category:(ToDoListCategory)category;
+- (instancetype)initWithTaskName:(NSString*)name dueDate:(NSDate*)date category:(ToDoListCategory)category
+                        complete:(BOOL)complete;
+
 - (NSString*)categoryString;
 
 // Returns an array of category names whose indices map to the ToDoListCategory enum

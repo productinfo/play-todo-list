@@ -10,14 +10,15 @@
 
 @implementation ToDoListItem
 
-- (instancetype)initWithTaskName: (NSString*)name dueDate:(NSDate*)date category:(ToDoListCategory)category {
+- (instancetype)initWithTaskName:(NSString *)name dueDate:(NSDate *)date category:(ToDoListCategory)category
+                        complete:(BOOL)complete {
   self = [super init];
   
   if (self) {
     self.taskName = name;
     self.dueDate = date;
     self.category = category;
-    self.complete = NO;
+    self.complete = complete;
   }
   
   return self;

@@ -36,6 +36,13 @@
   self.label.frame = CGRectInset(self.bounds, 20, 10);
 }
 
+- (void)applyStyle:(SDataGridCellStyle *)style {
+  [super applyStyle:style];
+  self.label.font = style.font;
+  self.label.textColor = style.textColor;
+  self.label.textAlignment = style.textAlignment;
+}
+
 #pragma mark SGridEventResponder methods
 
 // Called when the grid's edit event is triggered on this cell
@@ -60,6 +67,5 @@
   [self.popover presentPopoverFromRect:self.bounds inView:self permittedArrowDirections:UIPopoverArrowDirectionAny
                               animated:YES];
 }
-
 
 @end

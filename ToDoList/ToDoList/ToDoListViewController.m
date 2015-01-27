@@ -14,6 +14,8 @@
 #import "ToDoListDateCell.h"
 #import "ToDoListDeleteCell.h"
 #import "ToDoListItem.h"
+#import "ShinobiPlayUtils/UIFont+SPUFont.h"
+#import "ShinobiPlayUtils/UIColor+SPUColor.h"
 
 @interface ToDoListViewController ()
 
@@ -40,6 +42,23 @@
 }
 
 - (void)setupGrid {
+  SDataGridTheme *theme = [SDataGridiOS7Theme new];
+  
+  theme.headerRowStyle.textVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+  theme.headerRowStyle.font = [UIFont boldShinobiFontOfSize:20];
+  theme.headerRowStyle.textColor = [UIColor shinobiDarkGrayColor];
+  theme.headerRowStyle.backgroundColor = [[UIColor shinobiPlayGreenColor] shinobiBackgroundColor];
+  
+  theme.rowStyle.font = [UIFont boldShinobiFontOfSize:16];
+  theme.rowStyle.textColor = [UIColor shinobiDarkGrayColor];
+  theme.alternateRowStyle = theme.rowStyle;
+  
+  theme.selectedCellStyle.backgroundColor = [[UIColor shinobiPlayGreenColor] shinobiLightColor];
+  theme.selectedCellStyle.textColor = [UIColor shinobiDarkGrayColor];
+  theme.selectedCellStyle.font = theme.rowStyle.font;
+  
+  [self.grid applyTheme:theme];
+  
   // Create data source helper and its delegate
   self.delegate = [[ToDoListDataSourceHelperDelegate alloc] init];
   NSArray *data = [self createToDoListItems];
@@ -109,17 +128,49 @@
   NSDate *inFourWeeks = [today dateByAddingTimeInterval:4 * 7 * 24 * 60 * 60];
   
   // Create some items
-  return @[[[ToDoListItem alloc] initWithTaskName:@"Pick up milk" dueDate:today category:Home],
-           [[ToDoListItem alloc] initWithTaskName:@"Mow the lawn" dueDate:tomorrow category:Home],
-           [[ToDoListItem alloc] initWithTaskName:@"Buy birthday present for John" dueDate:tomorrow category:Social],
-           [[ToDoListItem alloc] initWithTaskName:@"Dinner with Jane @ 7pm" dueDate:tomorrow category:Social],
-           [[ToDoListItem alloc] initWithTaskName:@"Phone Mum" dueDate:inAWeek category:Social],
-           [[ToDoListItem alloc] initWithTaskName:@"Prepare presentation for next week" dueDate:inAWeek category:Office],
-           [[ToDoListItem alloc] initWithTaskName:@"Set up out-of-office" dueDate:inTenDays category:Office],
-           [[ToDoListItem alloc] initWithTaskName:@"Doctors appointment @ 9am" dueDate:inFourWeeks category:Personal],
-           [[ToDoListItem alloc] initWithTaskName:@"Buy foreign currency" dueDate:inTwoWeeks category:Holiday],
-           [[ToDoListItem alloc] initWithTaskName:@"Buy sun cream" dueDate:inTwoWeeks category:Holiday],
-           [[ToDoListItem alloc] initWithTaskName:@"Packing" dueDate:inTwoWeeks category:Holiday]
+  return @[[[ToDoListItem alloc] initWithTaskName:@"Pick up milk"
+                                          dueDate:today
+                                         category:Home
+                                         complete:YES],
+           [[ToDoListItem alloc] initWithTaskName:@"Mow the lawn"
+                                          dueDate:tomorrow
+                                         category:Home
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Buy birthday present for John"
+                                          dueDate:tomorrow
+                                         category:Social
+                                         complete:YES],
+           [[ToDoListItem alloc] initWithTaskName:@"Dinner with Jane @ 7pm"
+                                          dueDate:tomorrow
+                                         category:Social
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Phone Mum"
+                                          dueDate:inAWeek
+                                         category:Social
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Prepare presentation for next week"
+                                          dueDate:inAWeek
+                                         category:Office complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Set up out-of-office"
+                                          dueDate:inTenDays
+                                         category:Office
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Doctors appointment @ 9am"
+                                          dueDate:inFourWeeks
+                                         category:Personal
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Buy foreign currency"
+                                          dueDate:inTwoWeeks
+                                         category:Holiday
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Buy sun cream"
+                                          dueDate:inTwoWeeks
+                                         category:Holiday
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Packing"
+                                          dueDate:inTwoWeeks
+                                         category:Holiday
+                                         complete:NO]
           ];
 }
 
