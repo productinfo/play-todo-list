@@ -44,6 +44,7 @@
 		68C2BA071A7787BB005C034E /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68C2B9FB1A7787BB005C034E /* Roboto-Regular.ttf */; };
 		68C2BA081A7787BB005C034E /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68C2B9FC1A7787BB005C034E /* Roboto-Thin.ttf */; };
 		68C2BA091A7787BB005C034E /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68C2B9FD1A7787BB005C034E /* Roboto-ThinItalic.ttf */; };
+		68C2BA101A77F240005C034E /* ToDoListHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C2BA0F1A77F240005C034E /* ToDoListHeaderCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		68C2B9FB1A7787BB005C034E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		68C2B9FC1A7787BB005C034E /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		68C2B9FD1A7787BB005C034E /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		68C2BA0E1A77F240005C034E /* ToDoListHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListHeaderCell.h; sourceTree = "<group>"; };
+		68C2BA0F1A77F240005C034E /* ToDoListHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListHeaderCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				68795E7B199B48CF009CFF5D /* PopoverCells */,
+				68C2BA0E1A77F240005C034E /* ToDoListHeaderCell.h */,
+				68C2BA0F1A77F240005C034E /* ToDoListHeaderCell.m */,
 				686A16AE19990CAB00759B0A /* ToDoListDeleteCell.h */,
 				686A16AF19990CAB00759B0A /* ToDoListDeleteCell.m */,
 				686A16AC19990CAA00759B0A /* ToDoListCheckboxCell.h */,
@@ -389,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68795E7A199B4156009CFF5D /* ToDoListAbstractPopoverCell.m in Sources */,
+				68C2BA101A77F240005C034E /* ToDoListHeaderCell.m in Sources */,
 				686A16BD19990EFA00759B0A /* ToDoListAbstractPopoverViewController.m in Sources */,
 				68795E76199A5111009CFF5D /* ToDoListCategoryCell.m in Sources */,
 				686A16AB19990C2600759B0A /* ToDoListDataSourceHelperDelegate.m in Sources */,

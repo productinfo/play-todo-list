@@ -27,6 +27,7 @@
 #import "ToDoListDateCell.h"
 #import "ToDoListDeleteCell.h"
 #import "ToDoListItem.h"
+#import "ToDoListHeaderCell.h"
 #import "ShinobiPlayUtils/UIFont+SPUFont.h"
 #import "ShinobiPlayUtils/UIColor+SPUColor.h"
 
@@ -59,14 +60,14 @@
   
   theme.headerRowStyle.textVerticalAlignment = UIControlContentVerticalAlignmentCenter;
   theme.headerRowStyle.font = [UIFont boldShinobiFontOfSize:20];
-  theme.headerRowStyle.textColor = [UIColor shinobiDarkGrayColor];
-  theme.headerRowStyle.backgroundColor = [[UIColor shinobiPlayGreenColor] shinobiBackgroundColor];
+  theme.headerRowStyle.textColor = [UIColor whiteColor];
+  theme.headerRowStyle.backgroundColor = [UIColor shinobiPlayBlueColor];
   
   theme.rowStyle.font = [UIFont boldShinobiFontOfSize:16];
   theme.rowStyle.textColor = [UIColor shinobiDarkGrayColor];
   theme.alternateRowStyle = theme.rowStyle;
   
-  theme.selectedCellStyle.backgroundColor = [[UIColor shinobiPlayGreenColor] shinobiLightColor];
+  theme.selectedCellStyle.backgroundColor = [[UIColor shinobiPlayBlueColor] shinobiBackgroundColor];
   theme.selectedCellStyle.textColor = [UIColor shinobiDarkGrayColor];
   theme.selectedCellStyle.font = theme.rowStyle.font;
   
@@ -85,13 +86,13 @@
   // Add the columns to the grid
   [self createAndAddColumnWithTitle:nil
                         propertyKey:@"complete"
-                              width:50
+                              width:65
                            cellType:[ToDoListCheckboxCell class]
                             canSort:NO
-                      textAlignment:NSTextAlignmentLeft];
+                      textAlignment:NSTextAlignmentCenter];
   [self createAndAddColumnWithTitle:@"Task"
                         propertyKey:@"taskName"
-                              width:326
+                              width:370
                            cellType:[SDataGridTextCell class]
                             canSort:YES
                       textAlignment:NSTextAlignmentLeft];
@@ -109,10 +110,10 @@
                       textAlignment:NSTextAlignmentLeft];
   [self createAndAddColumnWithTitle:nil
                         propertyKey:@"delete"
-                              width:50
+                              width:65
                            cellType:[ToDoListDeleteCell class]
                             canSort:NO
-                      textAlignment:NSTextAlignmentLeft];
+                      textAlignment:NSTextAlignmentCenter];
   
   [self.grid reload];
 }
@@ -200,6 +201,7 @@
     column.sortMode = SDataGridColumnSortModeTriState;
   }
   column.cellStyle.textAlignment = alignment;
+  column.headerCellType = [ToDoListHeaderCell class];
   [self.grid addColumn:column];
 }
 
