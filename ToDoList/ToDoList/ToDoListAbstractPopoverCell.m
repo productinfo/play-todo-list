@@ -76,7 +76,7 @@
   
   // Finally create and display the popover
   self.popover = [[UIPopoverController alloc] initWithContentViewController:self.navigationController];
-  [self.popover setPopoverContentSize:CGSizeMake(300, 250) animated:NO];
+  [self.popover setPopoverContentSize:CGSizeMake(300, 200) animated:NO];
   [self.popover presentPopoverFromRect:self.bounds inView:self permittedArrowDirections:UIPopoverArrowDirectionAny
                               animated:YES];
 }
