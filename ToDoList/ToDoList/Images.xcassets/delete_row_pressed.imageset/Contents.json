@@ -3,12 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "delete_row_pressed.png"
+      "filename" : "cross-light.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "delete_row_pressed@2x.png"
+      "filename" : "cross-light@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "cross-light@3x.png"
     }
   ],
   "info" : {

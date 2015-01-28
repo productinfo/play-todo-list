@@ -3,12 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "task_checkbox_unchecked_iPad.png"
+      "filename" : "tick-empty.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "task_checkbox_unchecked_iPad@2x.png"
+      "filename" : "tick-empty@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "tick-empty@3x.png"
     }
   ],
   "info" : {

@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = "ToDoList"
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = "A ToDo List implemented using ShinobiGrids"
   s.description      = <<-DESC
                        A ToDoList which uses ShinobiGrids to allow the user to add, edit and remove tasks
