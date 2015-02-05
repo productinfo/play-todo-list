@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		540A1DA01A837F1600E2D36D /* SGridCell+RemoveShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 540A1D9F1A837F1600E2D36D /* SGridCell+RemoveShadow.m */; };
 		686A16611999047300759B0A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686A16601999047300759B0A /* Foundation.framework */; };
 		686A16631999047300759B0A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686A16621999047300759B0A /* CoreGraphics.framework */; };
 		686A16651999047300759B0A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686A16641999047300759B0A /* UIKit.framework */; };
@@ -72,6 +73,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		540A1D9E1A837F1600E2D36D /* SGridCell+RemoveShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SGridCell+RemoveShadow.h"; sourceTree = "<group>"; };
+		540A1D9F1A837F1600E2D36D /* SGridCell+RemoveShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SGridCell+RemoveShadow.m"; sourceTree = "<group>"; };
 		686A165D1999047300759B0A /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		686A16601999047300759B0A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		686A16621999047300759B0A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -181,6 +184,8 @@
 			children = (
 				68C2B9F11A7787BB005C034E /* Fonts */,
 				686A16CC1999FD4300759B0A /* CustomCells */,
+				540A1D9E1A837F1600E2D36D /* SGridCell+RemoveShadow.h */,
+				540A1D9F1A837F1600E2D36D /* SGridCell+RemoveShadow.m */,
 				686A166F1999047300759B0A /* ToDoListAppDelegate.h */,
 				686A16701999047300759B0A /* ToDoListAppDelegate.m */,
 				686A16BF19990F9000759B0A /* ToDoListItem.h */,
@@ -400,6 +405,7 @@
 				686A16AB19990C2600759B0A /* ToDoListDataSourceHelperDelegate.m in Sources */,
 				686A16771999047300759B0A /* ToDoListViewController.m in Sources */,
 				686A16B119990CAB00759B0A /* ToDoListDeleteCell.m in Sources */,
+				540A1DA01A837F1600E2D36D /* SGridCell+RemoveShadow.m in Sources */,
 				686A16BC19990EFA00759B0A /* ToDoListCategoryViewController.m in Sources */,
 				68795E7E199B4968009CFF5D /* ToDoListDateCell.m in Sources */,
 				686A16711999047300759B0A /* ToDoListAppDelegate.m in Sources */,
