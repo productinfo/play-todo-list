@@ -3,7 +3,20 @@
 //  ToDoList
 //
 //  Created by Alison Clarke on 11/08/2014.
-//  Copyright (c) 2014 Alison Clarke. All rights reserved.
+//
+//  Copyright 2014 Scott Logic
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "ToDoListViewController.h"
@@ -14,6 +27,9 @@
 #import "ToDoListDateCell.h"
 #import "ToDoListDeleteCell.h"
 #import "ToDoListItem.h"
+#import "ToDoListHeaderCell.h"
+#import "ShinobiPlayUtils/UIFont+SPUFont.h"
+#import "ShinobiPlayUtils/UIColor+SPUColor.h"
 
 @interface ToDoListViewController ()
 
@@ -40,6 +56,23 @@
 }
 
 - (void)setupGrid {
+  SDataGridTheme *theme = [SDataGridiOS7Theme new];
+  
+  theme.headerRowStyle.textVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+  theme.headerRowStyle.font = [UIFont boldShinobiFontOfSize:20];
+  theme.headerRowStyle.textColor = [UIColor whiteColor];
+  theme.headerRowStyle.backgroundColor = [UIColor shinobiPlayBlueColor];
+  
+  theme.rowStyle.font = [UIFont boldShinobiFontOfSize:16];
+  theme.rowStyle.textColor = [UIColor shinobiDarkGrayColor];
+  theme.alternateRowStyle = theme.rowStyle;
+  
+  theme.selectedCellStyle.backgroundColor = [[UIColor shinobiPlayBlueColor] shinobiBackgroundColor];
+  theme.selectedCellStyle.textColor = [UIColor shinobiDarkGrayColor];
+  theme.selectedCellStyle.font = theme.rowStyle.font;
+  
+  [self.grid applyTheme:theme];
+  
   // Create data source helper and its delegate
   self.delegate = [[ToDoListDataSourceHelperDelegate alloc] init];
   NSArray *data = [self createToDoListItems];
@@ -53,13 +86,13 @@
   // Add the columns to the grid
   [self createAndAddColumnWithTitle:nil
                         propertyKey:@"complete"
-                              width:50
+                              width:65
                            cellType:[ToDoListCheckboxCell class]
                             canSort:NO
-                      textAlignment:NSTextAlignmentLeft];
+                      textAlignment:NSTextAlignmentCenter];
   [self createAndAddColumnWithTitle:@"Task"
                         propertyKey:@"taskName"
-                              width:326
+                              width:370
                            cellType:[SDataGridTextCell class]
                             canSort:YES
                       textAlignment:NSTextAlignmentLeft];
@@ -77,10 +110,10 @@
                       textAlignment:NSTextAlignmentLeft];
   [self createAndAddColumnWithTitle:nil
                         propertyKey:@"delete"
-                              width:50
+                              width:65
                            cellType:[ToDoListDeleteCell class]
                             canSort:NO
-                      textAlignment:NSTextAlignmentLeft];
+                      textAlignment:NSTextAlignmentCenter];
   
   [self.grid reload];
 }
@@ -109,17 +142,49 @@
   NSDate *inFourWeeks = [today dateByAddingTimeInterval:4 * 7 * 24 * 60 * 60];
   
   // Create some items
-  return @[[[ToDoListItem alloc] initWithTaskName:@"Pick up milk" dueDate:today category:Home],
-           [[ToDoListItem alloc] initWithTaskName:@"Mow the lawn" dueDate:tomorrow category:Home],
-           [[ToDoListItem alloc] initWithTaskName:@"Buy birthday present for John" dueDate:tomorrow category:Social],
-           [[ToDoListItem alloc] initWithTaskName:@"Dinner with Jane @ 7pm" dueDate:tomorrow category:Social],
-           [[ToDoListItem alloc] initWithTaskName:@"Phone Mum" dueDate:inAWeek category:Social],
-           [[ToDoListItem alloc] initWithTaskName:@"Prepare presentation for next week" dueDate:inAWeek category:Office],
-           [[ToDoListItem alloc] initWithTaskName:@"Set up out-of-office" dueDate:inTenDays category:Office],
-           [[ToDoListItem alloc] initWithTaskName:@"Doctors appointment @ 9am" dueDate:inFourWeeks category:Personal],
-           [[ToDoListItem alloc] initWithTaskName:@"Buy foreign currency" dueDate:inTwoWeeks category:Holiday],
-           [[ToDoListItem alloc] initWithTaskName:@"Buy sun cream" dueDate:inTwoWeeks category:Holiday],
-           [[ToDoListItem alloc] initWithTaskName:@"Packing" dueDate:inTwoWeeks category:Holiday]
+  return @[[[ToDoListItem alloc] initWithTaskName:@"Pick up milk"
+                                          dueDate:today
+                                         category:Home
+                                         complete:YES],
+           [[ToDoListItem alloc] initWithTaskName:@"Mow the lawn"
+                                          dueDate:tomorrow
+                                         category:Home
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Buy birthday present for John"
+                                          dueDate:tomorrow
+                                         category:Social
+                                         complete:YES],
+           [[ToDoListItem alloc] initWithTaskName:@"Dinner with Jane @ 7pm"
+                                          dueDate:tomorrow
+                                         category:Social
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Phone Mum"
+                                          dueDate:inAWeek
+                                         category:Social
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Prepare presentation for next week"
+                                          dueDate:inAWeek
+                                         category:Office complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Set up out-of-office"
+                                          dueDate:inTenDays
+                                         category:Office
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Doctors appointment @ 9am"
+                                          dueDate:inFourWeeks
+                                         category:Personal
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Buy foreign currency"
+                                          dueDate:inTwoWeeks
+                                         category:Holiday
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Buy sun cream"
+                                          dueDate:inTwoWeeks
+                                         category:Holiday
+                                         complete:NO],
+           [[ToDoListItem alloc] initWithTaskName:@"Packing"
+                                          dueDate:inTwoWeeks
+                                         category:Holiday
+                                         complete:NO]
           ];
 }
 
@@ -136,6 +201,7 @@
     column.sortMode = SDataGridColumnSortModeTriState;
   }
   column.cellStyle.textAlignment = alignment;
+  column.headerCellType = [ToDoListHeaderCell class];
   [self.grid addColumn:column];
 }
 
