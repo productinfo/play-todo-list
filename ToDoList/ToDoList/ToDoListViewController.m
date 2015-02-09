@@ -81,7 +81,7 @@
                                                                   data:data];
   
   self.grid.canReorderRows = YES;
-  self.grid.defaultRowHeight = @45;
+  self.grid.defaultRowHeight = @43;
   
   // Add the columns to the grid
   [self createAndAddColumnWithTitle:nil
