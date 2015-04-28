@@ -1,7 +1,7 @@
-shinobiplay: Task Board (Objective-C/Swift)
+shinobiplay: ToDo List (Objective-C)
 =====================
 
-This project uses the **shinobiessentials** flow layout to create a task board (pin board) where items can be dragged between columns.
+This project uses **shinobigrids** to create a ToDo list, where items can be added and edited.
 
 ![Screenshot](screenshot.png?raw=true)
 
