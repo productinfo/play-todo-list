@@ -182,21 +182,24 @@
   return nil;
 }
 
-- (void)shinobiDataGrid:(ShinobiDataGrid *)grid didEndReorderingRow:(SDataGridRow *)row {
+- (void)shinobiDataGrid:(ShinobiDataGrid *)grid willEndReorderingRow:(SDataGridRow *)row {
   // When the user has manually reordered the grid, save the new order to use as our default.
-  // We do this after a short delay to make sure the reordering animations have finished,
-  // because changing the data will result in a reload of the grid
-  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.2f * NSEC_PER_SEC);
-  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    ToDoListDataSourceHelper *datasourceHelper = (ToDoListDataSourceHelper*)grid.dataSource;
-    datasourceHelper.data = [datasourceHelper.sortedData copy];
-  });
+  ToDoListDataSourceHelper *datasourceHelper = (ToDoListDataSourceHelper*)grid.dataSource;
+  datasourceHelper.data = [datasourceHelper.sortedData copy];
+  
+  // Set all columns to sort mode none, as we've reordered
+  for (SDataGridColumn *column in grid.columns) {
+    if (column.sortOrder != SDataGridColumnSortOrderNone) {
+      column.sortOrder = SDataGridColumnSortOrderNone;
+    }
+  }
 }
 
 - (void)shinobiDataGrid:(ShinobiDataGrid *)grid didChangeSortOrderForColumn:(SDataGridColumn*) column
                   from:(SDataGridColumnSortOrder) oldSortOrder {
-  // Update canReorderRows - we want them to be reorderable if and only if the sort order is none
-  grid.canReorderRows = (column.sortOrder == SDataGridColumnSortOrderNone);
+  // Update canReorderRows - we want them to be reorderable no matter what, so we override
+  // the default behaviour (which disables reordering if a column is sorted)
+  grid.canReorderRows = YES;
 }
 
 #pragma mark - local methods
